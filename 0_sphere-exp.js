@@ -1,6 +1,7 @@
 import * as THREE from 'three';
-import * as CANNON from 'cannon-es';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import * as CANNON from "https://cdn.skypack.dev/cannon-es";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import {MindARThree} from 'mindar-image-three';
 
 let scene, camera, renderer, world;
 let hemisphereBody, secondHemisphereBody, tubeBodies = [], bottomPlaneBody, topPlaneBody;
