@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // initialize MindAR
         const mindarThree = new MindARThree({
             container: document.body,
-            imageTargetSrc: '/experiment_target2.mind',
+            imageTargetSrc: './experiment_target2.mind',
         });
         const { renderer, scene, camera } = mindarThree;
 
