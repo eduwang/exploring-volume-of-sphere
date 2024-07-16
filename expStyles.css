@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #e8f5e9; /* Light green background */
+}
+
+#ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicking through to orbit controls */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.counter-container {
+    text-align: center;
+    margin-top: 20px;
+    pointer-events: auto; /* Enable pointer events */
+    display: flex;
+    flex-direction: row; /* Arrange items vertically */
+    align-items: center;
+}
+.counter-container div {
+    margin-right: 10px; /* Add spacing between div elements */
+    margin-left: 10px; /* Add spacing between div elements */
+
+}
+
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    pointer-events: auto; /* Enable pointer events */
+}
+
+.top-right-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: auto; /* Enable pointer events */
+}
+
+.top-right-container button {
+    background-color: #e1e1e1; /* Gray background */
+    color: rgb(18, 18, 18);
+    border: solid;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    width: 100px; /* Fixed button width */
+    margin: 5px;
+    pointer-events: auto; /* Enable pointer events */
+}
+
+.top-right-container button:hover {
+    background-color: #252525; /* Darker gray on hover */
+    color: #c1c1c1;
+
+}
+
+button {
+    background-color: #333333; /* Gray background */
+    color: white;
+    border: solid;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    width: 200px; /* Fixed button width */
+    margin: 5px;
+    pointer-events: auto; /* Enable pointer events */
+}
+
+button:hover {
+    background-color: #444444; /* Darker gray on hover */
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    .top-right-container {
+        margin-top: 8%;
+        gap: 1px;
+    }
+
+    .top-right-container button {
+        font-size: 0.6em;
+        width: 80px; /* Smaller button width for mobile */
+        padding: 4px 8px;
+    }
+
+    button {
+        font-size: 0.8em;
+        width: 150px; /* Smaller button width for mobile */
+        padding: 8px 16px;
+    }
+}

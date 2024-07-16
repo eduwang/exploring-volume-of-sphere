@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e8f5e9; /* Light green background */
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #000000; /* Dark green text for the title */
+    margin-bottom: 20px;
+}
+
+a {
+    display: inline-block;
+    margin: 20px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #468848; /* Dark green button */
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    width: 90%;
+}
+
+a:hover {
+    background-color: #2e7d32; /* Darker green on hover */
+}

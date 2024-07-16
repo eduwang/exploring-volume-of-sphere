@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="expStyles.css">
+    <title>공 채우기 실험</title>
+</head>
+<body>
+    <div id="ui">
+        <div class="counter-container">
+            <div style="color: wheat;">구 안의 공 개수: <span id="sphereBallCount">0</span></div>
+            <div style="color: wheat;">원기둥 안의 공 개수: <span id="cylinderBallCount">0</span></div>
+        </div>
+        <div class="button-container">        
+            <button id="addBallToSphere">구에 공 채우기</button>
+            <button id="addBallToCylinder">원기둥에 공 채우기</button>
+            <button style="display: none;" id="listObjects">List Objects in Scene</button>
+            <button id="fillBoth">함께 채우기</button>
+        </div>
+        <div class="top-right-container">
+            <button id="shakeScene">흔들기</button>
+            <button id="removeAllBalls">공 다 없애기</button>    
+            <button id="ballSizeBigger">공 크기 크게</button>    
+            <button id="ballSizeSmaller">공 크기 작게</button>  
+        </div>
+
+    </div>
+    <script type="module" src="/0_sphere-exp.js"></script>
+</body>
+</html>
