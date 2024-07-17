@@ -3,16 +3,6 @@ import * as CANNON from "https://cdn.skypack.dev/cannon-es";
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {MindARThree} from 'mindar-image-three';
 
-
-
-let scene, camera, renderer, world;
-let hemisphereBody, secondHemisphereBody, tubeBodies = [], bottomPlaneBody, topPlaneBody;
-let sphereBallCount = 0, cylinderBallCount = 0;
-let ballRadius = 0.1;
-let sphereBalls = []; // Array to track balls added to the sphere
-let cylinderBalls = []; // Array to track balls added to the cylinder
-let isShaking = false;
-
 document.addEventListener('DOMContentLoaded', () => {
     const start = async () => {
 
@@ -55,13 +45,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Link the AR anchor to trigger the scene rendering when the target image is detected
         const anchor = mindarThree.addAnchor(0);
         anchor.group.add(arGroup);
+        
+        const controlUI = document.getElementById("ui")
 
         anchor.onTargetFound = () => {
             // Apply transformation when the target is found
             arGroup.scale.set(0.35, 0.35, 0.35);  // Adjust the scale as needed
             arGroup.rotation.set(Math.PI/2, 0, 0);  // Adjust the rotation as needed (in radians)
             arGroup.position.set(-1, 0, 1);  // Adjust these values as needed
+            controlUI.style.display = 'block';
         };
+
+        anchor.onTargetLost = () => {
+            controlUI.style.display = 'none';
+        }
 
         // Add button event listeners after initializing the scene and world
         addEventListeners(world, arGroup);
