@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded',() => {
     let currentModel = null;
     let mixer = null;
     let action = null;
+    let light = null;
+    let ambientLight = null;
+    let directionalLight = null;
   
     const start = async () => {
         // initialize MindAR 
@@ -33,13 +36,13 @@ document.addEventListener('DOMContentLoaded',() => {
         const {renderer, scene, camera} = mindarThree;
     
         // create light
-        const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
-        scene.add(light);
-        const ambientLight = new THREE.AmbientLight(0x404040);
-        scene.add(ambientLight);
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
-        directionalLight.position.set(5, 5, 5).normalize();
-        scene.add(directionalLight);
+        // const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+        // scene.add(light);
+        // const ambientLight = new THREE.AmbientLight(0x404040);
+        // scene.add(ambientLight);
+        // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+        // directionalLight.position.set(5, 5, 5).normalize();
+        // scene.add(directionalLight);
     
         // create anchor
         const anchor = mindarThree.addAnchor(0);
@@ -101,6 +104,20 @@ document.addEventListener('DOMContentLoaded',() => {
             mixer.update(delta);
           }
           renderer.render(scene, camera);
+        });
+
+        // Bring the light button event
+        document.getElementById('bring-the-light').addEventListener('click', () => {
+          if (!light && !ambientLight && !directionalLight) {
+            // Create and add light
+            light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+            scene.add(light);
+            ambientLight = new THREE.AmbientLight(0x404040);
+            scene.add(ambientLight);
+            directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
+            directionalLight.position.set(5, 5, 5).normalize();
+            scene.add(directionalLight);
+          }
         });
       }
       start();
