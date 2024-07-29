@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js & Cannon.js Trapezoid Prism</title>
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports":{
+          "three": "https://unpkg.com/three@v0.127.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/",
+          "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-three.prod.js"
+        }
+      }
+    </script>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        #ui {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="ui">
+        <button id="addBallToSphere">Add Ball to Sphere</button>
+        <button id="addBallToCylinder">Add Ball to Cylinder</button>
+        <button id="listObjects">List Objects</button>
+        <button id="fillBoth">Fill Both</button>
+        <button id="removeAllBalls">Remove All Balls</button>
+        <button id="ballSizeBigger">Ball Size Bigger</button>
+        <button id="ballSizeSmaller">Ball Size Smaller</button>
+        <button id="shakeScene">Shake Scene</button>
+        <div>Sphere Ball Count: <span id="sphereBallCount">0</span></div>
+        <div>Cylinder Ball Count: <span id="cylinderBallCount">0</span></div>
+    </div> -->
+    <script type="module" src="./3_cavalieri_intro.js"></script>
+</body>
+</html>

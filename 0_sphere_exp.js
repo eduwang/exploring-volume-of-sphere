@@ -354,6 +354,11 @@ function visualizeCannonShape(body, color) {
             geometry.computeVertexNormals(); // Ensure smooth shading
             const material = new THREE.MeshPhongMaterial({ color, side: THREE.FrontSide  });
             mesh = new THREE.Mesh(geometry, material);
+
+            // // Add edges for better visualization
+            // const edges = new THREE.EdgesGeometry(geometry);
+            // const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
+            // mesh.add(line);
         }
         if (mesh) {
             mesh.position.copy(body.position);
