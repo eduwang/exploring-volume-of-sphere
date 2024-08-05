@@ -92,6 +92,16 @@ button:hover {
     background-color: #444444; /* Darker gray on hover */
 }
 
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
 /* Media Query for Mobile Devices */
 @media (max-width: 768px) {
     .top-right-container {
