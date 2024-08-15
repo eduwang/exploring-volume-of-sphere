@@ -69,9 +69,9 @@ function init() {
 
     // Cannon.js world setup
     world = new CANNON.World();
-    world.gravity.set(0, -20, 0); // Increase gravity to make objects fall faster
+    world.gravity.set(0, -30, 0); // Increase gravity to make objects fall faster
     world.broadphase = new CANNON.NaiveBroadphase(); // Simple broadphase for small scenes
-    world.solver.iterations = 10; // Increase solver iterations for better stability
+    world.solver.iterations = 30; // Increase solver iterations for better stability
 
     // Create hemisphere shape
     const radius = 2;
@@ -113,7 +113,7 @@ function init() {
     world.addBody(hemisphereBody);
 
     // Visualize first hemisphere
-    visualizeCannonShape(hemisphereBody, 0x00ff00);
+    visualizeCannonShape(hemisphereBody, 0xFFF2CC);
 
     // Second hemisphere (duplicate)
     secondHemisphereBody = new CANNON.Body({ mass: 0 });
@@ -123,7 +123,7 @@ function init() {
     world.addBody(secondHemisphereBody);
 
     // Visualize second hemisphere
-    visualizeCannonShape(secondHemisphereBody, 0x00ff00); // Different color for distinction
+    visualizeCannonShape(secondHemisphereBody, 0xD9EAD3); // Different color for distinction
 
     // Create and stack three tubes
     const tubeRadius = radius;
@@ -301,10 +301,26 @@ function addBallToCylinder() {
     cylinderBallCount++;
     document.getElementById('cylinderBallCount').innerText = cylinderBallCount;
 }
+
 function fillBoth() {
-    addBallToSphere();
-    addBallToCylinder();
+    let repeatCount;
+
+    if (ballRadius <= 0.1) {
+        repeatCount = 5;
+    } else if (ballRadius > 0.1 && ballRadius < 0.2) {
+        repeatCount = 3;
+    } else if (ballRadius >= 0.2 && ballRadius < 0.3) {
+        repeatCount = 2;
+    } else {
+        repeatCount = 1;
+    }
+
+    for (let i = 0; i < repeatCount; i++) {
+        addBallToSphere();
+        addBallToCylinder();
+    }
 }
+
 function removeAllBalls() {
     sphereBalls.forEach(ballBody => {
         world.removeBody(ballBody);
@@ -460,7 +476,7 @@ function animate() {
         }
 
         // Check if ball has fallen through the hemisphere
-        if (ballBody.position.y < -10) {
+        if (ballBody.position.y < -2) {
             console.warn('Sphere ball has fallen through the hemisphere:', ballBody.position);
 
             // Remove the ball from the world and scene
