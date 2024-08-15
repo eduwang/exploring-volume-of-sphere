@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded',() => {
           const gltf = await loadGLTF(modelPath);
           gltf.scene.scale.set(0.5, 0.5, 0.5);
           gltf.scene.rotation.set(Math.PI / 2, 0, 0);
-          gltf.scene.position.set(0, 0, 0);
+          gltf.scene.position.set(-1.1, 0, 0);
           anchor.group.add(gltf.scene);
 
 
