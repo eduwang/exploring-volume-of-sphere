@@ -156,10 +156,28 @@ function init() {
 
     // Set up camera feed
     const video = document.getElementById('video');
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        navigator.mediaDevices.getUserMedia({
+            video: {
+                facingMode: { exact: "environment" } // 후면 카메라 사용
+            }
+        })
+        .then(function(stream) {
             video.srcObject = stream;
             video.play();
+        })
+        .catch(function(error) {
+            console.error("Error accessing rear camera: ", error);
+            // 후면 카메라가 없거나 오류가 발생하면 전면 카메라로 대체
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(error) {
+                    console.error("Error accessing fallback camera: ", error);
+                });
         });
     }
 }
