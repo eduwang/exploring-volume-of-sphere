@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Example</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <input type="range" id="segments" min="1" max="300" value="5" step="1">
+    <input type="range" id="offset" min="0" max="200" value="0" step="1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer;
+        let segmentsSlider, offsetSlider;
+        let segments = 5;
+        let offset = 0;
+        let h = 200;
+        let cuboids = [];
+
+        function init() {
+            // Scene, Camera, Renderer 설정
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // 슬라이더 설정
+            segmentsSlider = document.getElementById('segments');
+            offsetSlider = document.getElementById('offset');
+
+            segmentsSlider.addEventListener('input', updateValues);
+            offsetSlider.addEventListener('input', updateValues);
+
+            // 조명 설정
+            const light = new THREE.DirectionalLight(0xffffff, 1);
+            light.position.set(0, 0, 500).normalize();
+            scene.add(light);
+
+            // 카메라 위치 설정
+            camera.position.z = 400;
+
+            // 큐브들 생성
+            createCuboids();
+
+            updateValues();  // 초기 값을 설정
+            animate();
+        }
+
+        function createCuboids() {
+            const baseWidth = 100;
+            const depth = 50;
+            const baseHeight = h / segments;
+
+            // 첫 번째 사각기둥 더미
+            cuboids.push(createCuboid(150, 0, baseWidth, h, depth));
+
+            // 두 번째 이동된 사각기둥 더미
+            for (let i = 0; i < segments; i++) {
+                let y = -h / 2 + i * baseHeight;
+                cuboids.push(createCuboid(-150 + i * (offset / segments), y, baseWidth, baseHeight, depth));
+            }
+        }
+
+        function createCuboid(x, y, w, h, d) {
+            const geometry = new THREE.BoxGeometry(w, h, d);
+            const material = new THREE.MeshPhongMaterial({ color: 0xcc6666 });
+            const cuboid = new THREE.Mesh(geometry, material);
+
+            cuboid.position.set(x + w / 2, y + h / 2, -d / 2); // 위치 조정
+            scene.add(cuboid);
+            return cuboid;
+        }
+
+        function updateValues() {
+            segments = parseInt(segmentsSlider.value);
+            offset = parseInt(offsetSlider.value);
+
+            // 기존 큐브 제거
+            cuboids.forEach(cube => scene.remove(cube));
+            cuboids = [];
+
+            // 새로 큐브 생성
+            createCuboids();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        window.addEventListener('resize', onWindowResize, false);
+
+        init();
+    </script>
+</body>
+</html>
