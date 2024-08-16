@@ -35,9 +35,11 @@ function setup() {
     segmentsSlider.input(updateValues);
     offsetSlider.input(updateValues);
 
+    
     updateValues();  // 초기 값을 설정합니다.
 
-    noLoop();  // 한 번만 그리도록 설정
+
+    // noLoop();  // 한 번만 그리도록 설정
 
     
 }
@@ -75,20 +77,29 @@ function draw() {
     }
 }
 
-function drawCuboid(x, y, w, h, d) {
+function drawCuboid(x, y, w, h, d, i) {
     push();
     translate(x, y);
 
     
     // 바닥면
-    fill(125, 65, 65);
-    beginShape();
-    vertex(0, h);
-    vertex(w, h);
-    vertex(w + d, h - d);
-    vertex(d, h - d);
-    endShape(CLOSE);
+    // fill(125, 65, 65);
+    // beginShape();
+    // vertex(0, h);
+    // vertex(w, h);
+    // vertex(w + d, h - d);
+    // vertex(d, h - d);
+    // endShape(CLOSE);
 
+
+    // 윗면
+    fill(175, 75, 75);
+    beginShape();
+    vertex(0, 0);
+    vertex(w, 0);
+    vertex(w + d, -d);
+    vertex(d, -d);
+    endShape(CLOSE);
 
     // 옆면(우)
     fill(175, 85, 85);
@@ -100,26 +111,14 @@ function drawCuboid(x, y, w, h, d) {
     endShape(CLOSE);
 
     // 옆면(좌)
-    fill(175, 85, 85);
-    beginShape();
-    vertex(0, 0);
-    vertex(d, -d);
-    vertex(d, h - d);
-    vertex(0, h);
-    endShape(CLOSE);
+    // fill(175, 85, 85);
+    // beginShape();
+    // vertex(0, 0);
+    // vertex(d, -d);
+    // vertex(d, h - d);
+    // vertex(0, h);
+    // endShape(CLOSE);
     
-
-    // 윗면
-    fill(175, 75, 75);
-    beginShape();
-    vertex(0, 0);
-    vertex(w, 0);
-    vertex(w + d, -d);
-    vertex(d, -d);
-    endShape(CLOSE);
-
-    
-
     // 앞면
     fill(200, 100, 100);
     beginShape();
