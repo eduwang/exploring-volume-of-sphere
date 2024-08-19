@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded',() => {
         const mindarThree = new MindARThree({
           container: document.body,
           imageTargetSrc: './experiment_target2.mind',
+          rendererSettings: {
+            antialias: true,  // 이 줄을 추가하여 안티앨리어싱 활성화
+          }
         });
         const {renderer, scene, camera} = mindarThree;
 
@@ -79,6 +82,16 @@ document.addEventListener('DOMContentLoaded',() => {
           anchor.onTargetLost = () => {
             sliderController.style.display = "none";
             console.log("target lost")
+            };
+
+            const SMOOTHING_FACTOR = 0.01;
+            let previousPosition = new THREE.Vector3();
+            let currentPosition = new THREE.Vector3();
+
+            anchor.onUpdate = (newPosition) => {
+              currentPosition.lerpVectors(previousPosition, newPosition, SMOOTHING_FACTOR);
+              anchor.group.position.copy(currentPosition);
+              previousPosition.copy(currentPosition);
             };
 
           // 애니메이션 처리
