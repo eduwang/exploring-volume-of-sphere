@@ -157,7 +157,7 @@ function createCones() {
         }
 
         // 마지막 원뿔을 맨 위에 생성
-        objects.push(createCone(-100 + offset, lastY + baseHeight / 2, lastTopRadius, baseHeight, depth, 0xcc6666));
+        objects.push(createCone(-100 + offset*0.995, lastY + baseHeight / 2, lastTopRadius, baseHeight, depth, 0xcc6666));
     }
 }
 
