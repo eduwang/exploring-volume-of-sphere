@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- <meta name ="viewport" content="width=device-width, initial-scale = 1.0"> -->
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports":{
+          "three": "https://unpkg.com/three@v0.127.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/",
+          "mindar-image-three":"https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-three.prod.js"
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@100..900&family=Sankofa+Display&display=swap" rel="stylesheet">
+    <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
+ 
+    <style>
+      html, body {
+        position: relative;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        text-align: center;
+      }
+      #slider-control, #slider-control-0{
+        position: absolute;
+        bottom: 20px; /* 하단에 위치 */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000; /* 최상단으로 설정 */
+        background: rgba(255, 255, 255, 0.8); /* 배경색과 투명도 설정 */
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .hidden {
+        display: none;
+      }
+      button {
+        font-size: 20px;
+        font-family: "Noto Sans KR", sans-serif;
+        font-optical-sizing: auto;
+        /* font-weight: <weight>; */
+        font-style: normal;
+        border: 0;
+      }
+      button:hover {
+        /* border: 2px solid #007bff; hover 시 나타날 테두리 */
+        background-color: #e0e0e0; /* hover 시 배경색 변경 */
+      }
+    </style>
+    <script type = "module" src ="./Final_exercise_2_new.js"></script>
+
+  </head>
+
+  <body>
+    <div id="slider-control" style="display: none;">
+      <button id="bring-the-light">작은 조각으로 나누기</button>
+      <button id="bring-it-back" class="hidden">원래대로 되돌리기</button>      
+      <br>
+      <div id="radio-div" style="display: none;">
+        <input type="radio" id="show-slider1" name="show-slider" value="slider1">
+        <label for="show-slider1">1단계</label>
+        <input type="radio" id="show-slider2" name="show-slider" value="slider2">
+        <label for="show-slider2">2단계</label>
+        <input type="radio" id="show-slider3" name="show-slider" value="slider3">
+        <label for="show-slider3">3단계</label>
+      </div>
+
+      <div id="sliders">
+        <div id="slider1-container" class="hidden">
+            <input type="range" id="slider1" name="slider1" min="0" max="100" step="0.001" value="0">
+        </div>
+        <div id="slider2-container" class="hidden">
+            <input type="range" id="slider2" name="slider2" min="0" max="100" step="0.001" value="0">
+        </div>
+        <div id="slider3-container" class="hidden">
+            <input type="range" id="slider3" name="slider3" min="0" max="100" step="0.001" value="0">
+        </div>
+      </div>
+    </div>
+    <div id="slider-control-0" style="display: none;">
+      <div id="sliders">
+        <div id="slider0-container">
+          <input type="range" id="slider0" name="slider0" min="0" max="100" step="0.001" value="0">
+        </div>        
+      </div>
+    </div>
+  </body>
+</html>
