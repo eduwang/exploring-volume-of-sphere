@@ -182,10 +182,10 @@ document.addEventListener('DOMContentLoaded',() => {
             previousTime = currentTime;
 
             if (mixer) {
-              mixer.update(delta);
+              // mixer.update(delta);
             }
             if (mixer0) {
-              mixer0.update(delta);
+              // mixer0.update(delta);
             }
             renderer.render(scene, camera);
           }
