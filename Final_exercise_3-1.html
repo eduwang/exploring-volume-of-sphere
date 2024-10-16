@@ -79,8 +79,8 @@
     </style>
 </head>
 <body>
-    <video id="videoElement" autoplay muted></video> <!-- 카메라 피드 -->
-
+    <video id="videoElement" autoplay={true} playsInline = {true} muted = {true}></video>
+    
     <div id="controls">
         <label for="segments">Segments</label>
         <input type="range" id="segments" min="1" max="50" value="1">
