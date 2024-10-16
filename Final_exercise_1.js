@@ -155,12 +155,12 @@ function init() {
     }); // Add button for shaking the scene
 
     // Set up camera feed
-    const video = document.getElementById('video');
+    const video = document.getElementById('videoElement');
 
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({
             video: {
-                facingMode: { exact: "environment" } // 후면 카메라 사용
+                facingMode: { ideal: "environment" } // 후면 카메라 사용
             }
         })
         .then(function(stream) {
