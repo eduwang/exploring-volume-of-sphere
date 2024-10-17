@@ -6,7 +6,7 @@ import {MindARThree} from 'mindar-image-three';
 let scene, camera, renderer, world;
 let hemisphereBody, secondHemisphereBody, tubeBodies = [], bottomPlaneBody, topPlaneBody;
 let sphereBallCount = 0, cylinderBallCount = 0;
-let ballRadius = 0.1;
+let ballRadius = 0.2;
 let sphereBalls = []; // Array to track balls added to the sphere
 let cylinderBalls = []; // Array to track balls added to the cylinder
 let isShaking = false;
@@ -35,10 +35,10 @@ function init() {
         function rotateScene() {
             console.log(scene.rotation.x)
             if (rotateOrientation == 0){
-                rotationAngle -= Math.PI / 16
+                rotationAngle -= Math.PI / 32
                 scene.rotation.set(rotationAngle,0,0)
             } else{
-                rotationAngle += Math.PI / 16
+                rotationAngle += Math.PI / 32
                 scene.rotation.set(rotationAngle,0,0)
             }
             if(rotationAngle < -Math.PI / 3){
@@ -69,7 +69,7 @@ function init() {
 
     // Cannon.js world setup
     world = new CANNON.World();
-    world.gravity.set(0, -30, 0); // Increase gravity to make objects fall faster
+    world.gravity.set(0, -40, 0); // Increase gravity to make objects fall faster
     world.broadphase = new CANNON.NaiveBroadphase(); // Simple broadphase for small scenes
     world.solver.iterations = 30; // Increase solver iterations for better stability
 
@@ -155,31 +155,18 @@ function init() {
     }); // Add button for shaking the scene
 
     // Set up camera feed
-    const video = document.getElementById('videoElement');
-
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: { ideal: "environment" } // 후면 카메라 사용
-            }
-        })
-        .then(function(stream) {
+    // Access the rear camera
+    navigator.mediaDevices.getUserMedia({ 
+        video: { 
+            facingMode: {ideal: 'environment'} 
+        } 
+    }).then(function (stream) {
+            var video = document.getElementById('videoElement');
             video.srcObject = stream;
-            video.play();
         })
-        .catch(function(error) {
-            console.error("Error accessing rear camera: ", error);
-            // 후면 카메라가 없거나 오류가 발생하면 전면 카메라로 대체
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function(stream) {
-                    video.srcObject = stream;
-                    video.play();
-                })
-                .catch(function(error) {
-                    console.error("Error accessing fallback camera: ", error);
-                });
+        .catch(function (error) {
+            console.error('Error accessing the camera: ', error);
         });
-    }
 }
 
 function createAndVisualizeTube(radius, height, segments, index, color) {
@@ -305,7 +292,7 @@ function addBallToCylinder() {
 function fillBoth() {
     let repeatCount;
 
-    if (ballRadius <= 0.1) {
+    if (ballRadius <= 0.15) {
         repeatCount = 5;
     } else if (ballRadius > 0.1 && ballRadius < 0.2) {
         repeatCount = 3;
@@ -345,7 +332,7 @@ function ballSizeBigger() {
     addBallToCylinder();
     if (ballRadius > 0.5) {
         alert("TOO BIG!!! 처음으로 돌아갑니다");
-        ballRadius = 0.1;
+        ballRadius = 0.2;
         removeAllBalls();
     }
 }
@@ -355,9 +342,9 @@ function ballSizeSmaller() {
     ballRadius -= 0.02;
     addBallToSphere();
     addBallToCylinder();
-    if (ballRadius < 0.021) {
+    if (ballRadius < 0.081) {
         alert("TOO SMALL!!! 처음으로 돌아갑니다");
-        ballRadius = 0.1;
+        ballRadius = 0.2;
         removeAllBalls();
     }
 }
