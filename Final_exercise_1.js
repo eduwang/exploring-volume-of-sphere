@@ -6,7 +6,7 @@ import {MindARThree} from 'mindar-image-three';
 let scene, camera, renderer, world;
 let hemisphereBody, secondHemisphereBody, tubeBodies = [], bottomPlaneBody, topPlaneBody;
 let sphereBallCount = 0, cylinderBallCount = 0;
-let ballRadius = 0.2;
+let ballRadius = 0.40;
 let sphereBalls = []; // Array to track balls added to the sphere
 let cylinderBalls = []; // Array to track balls added to the cylinder
 let isShaking = false;
@@ -151,7 +151,7 @@ function init() {
     document.getElementById('ballSizeSmaller').addEventListener('click', ballSizeSmaller);
     document.getElementById('shakeScene').addEventListener('click', () => {
         shakeScene();
-        saveCameraPosition();
+        // saveCameraPosition();
     }); // Add button for shaking the scene
 
     // Set up camera feed
@@ -246,7 +246,7 @@ function addBallToSphere() {
     const ballShape = new CANNON.Sphere(ballRadius);
     const ballBody = new CANNON.Body({ mass: 1 });
     ballBody.addShape(ballShape);
-    const xPosition = (Math.random() - 0.5) * 2; // Random value between -1 and 1
+    const xPosition = (Math.random() - 0.5) * 2.5; // Random value between -1 and 1
     const yPosition = (Math.random() - 0.5) * 0.3 + 0.8; // Random value between -1 and 1
     ballBody.position.set(xPosition, yPosition, 0); // Start above the hemisphere
     ballBody.collisionFilterGroup = 1;
@@ -330,10 +330,18 @@ function ballSizeBigger() {
     ballRadius += 0.02;
     addBallToSphere();
     addBallToCylinder();
-    if (ballRadius > 0.5) {
+    if (ballRadius > 0.40) {
         alert("TOO BIG!!! 처음으로 돌아갑니다");
-        ballRadius = 0.2;
+        ballRadius = 0.40;
         removeAllBalls();
+    }
+    if (ballRadius <= 0.31 && ballRadius>=0.29) {
+        alert("아주 적당한 사이즈에요");
+        console.log(ballRadius);
+    }
+    if (ballRadius <= 0.19 && ballRadius>=0.17) {
+        alert("충분히 작은 사이즈에요");
+        console.log(ballRadius);
     }
 }
 
@@ -344,12 +352,20 @@ function ballSizeSmaller() {
     addBallToCylinder();
     if (ballRadius < 0.081) {
         alert("TOO SMALL!!! 처음으로 돌아갑니다");
-        ballRadius = 0.2;
+        ballRadius = 0.40;
         removeAllBalls();
+    }
+    if (ballRadius <= 0.31 && ballRadius>=0.29) {
+        alert("아주 적당한 사이즈에요");
+        console.log(ballRadius);
+    }
+    if (ballRadius <= 0.19 && ballRadius>=0.17) {
+        alert("충분히 작은 사이즈에요");
+        console.log(ballRadius);
     }
 }
 
-let forceMagnitude = 50;
+let forceMagnitude = 30;
 function shakeScene() {
     if (isShaking) return; // Prevent multiple shakes at the same time
 
@@ -358,9 +374,9 @@ function shakeScene() {
     const interval = 50; // Interval at which to apply forces
     // const forceMagnitude = 80; // Magnitude of the force to apply
     if(ballRadius<0.2){
-        forceMagnitude = 50;
+        forceMagnitude = 30;
     } else{
-        forceMagnitude = 90;
+        forceMagnitude = 30;
     }
     
 
@@ -376,7 +392,16 @@ function shakeScene() {
         }
 
         // Apply a random force to each ball
-        [...sphereBalls, ...cylinderBalls].forEach(ballBody => {
+        [...sphereBalls].forEach(ballBody => {
+            const force = new CANNON.Vec3(
+                (Math.random() - 0.5) * forceMagnitude * 10,
+                (Math.random() - 0.5) * forceMagnitude * 10,
+                (Math.random() - 0.5) * forceMagnitude * 10
+            );
+            ballBody.applyForce(force, ballBody.position);
+        });
+
+        [...cylinderBalls].forEach(ballBody => {
             const force = new CANNON.Vec3(
                 (Math.random() - 0.5) * forceMagnitude,
                 (Math.random() - 0.5) * forceMagnitude,
@@ -384,6 +409,8 @@ function shakeScene() {
             );
             ballBody.applyForce(force, ballBody.position);
         });
+
+
     }, interval);
 }
 
