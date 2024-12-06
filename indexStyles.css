@@ -33,3 +33,9 @@ a {
 a:hover {
     background-color: #2e7d32; /* Darker green on hover */
 }
+.sourceIndicator{
+    background-color: #2f5266; 
+}
+.sourceIndicator:hover{
+    background-color: rgb(28, 54, 154); 
+}
